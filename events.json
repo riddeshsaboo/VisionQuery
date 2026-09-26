@@ -1,0 +1,1258 @@
+[
+    {
+        "event_id": 1,
+        "track_id": 21,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:45:44",
+        "end_time": "2026-09-01 17:45:47",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 2,
+        "track_id": 38,
+        "object_type": "car",
+        "start_time": "2026-09-01 17:46:07",
+        "end_time": "2026-09-01 17:46:08",
+        "attributes": {
+            "color": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 3,
+        "track_id": 39,
+        "object_type": "car",
+        "start_time": "2026-09-01 17:46:07",
+        "end_time": "2026-09-01 17:46:08",
+        "attributes": {
+            "color": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 4,
+        "track_id": 42,
+        "object_type": "car",
+        "start_time": "2026-09-01 17:46:08",
+        "end_time": "2026-09-01 17:46:09",
+        "attributes": {
+            "color": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 5,
+        "track_id": 53,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:46:11",
+        "end_time": "2026-09-01 17:46:15",
+        "attributes": {
+            "shirt": "red",
+            "pants": "red"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 6,
+        "track_id": 79,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:46:19",
+        "end_time": "2026-09-01 17:46:21",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 7,
+        "track_id": 78,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:46:19",
+        "end_time": "2026-09-01 17:46:24",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 8,
+        "track_id": 85,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:46:22",
+        "end_time": "2026-09-01 17:46:25",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 9,
+        "track_id": 136,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:47:30",
+        "end_time": "2026-09-01 17:47:38",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 10,
+        "track_id": 139,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:48:01",
+        "end_time": "2026-09-01 17:48:11",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 11,
+        "track_id": 142,
+        "object_type": "car",
+        "start_time": "2026-09-01 17:48:22",
+        "end_time": "2026-09-01 17:48:24",
+        "attributes": {
+            "color": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 12,
+        "track_id": 166,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:48:58",
+        "end_time": "2026-09-01 17:49:03",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 13,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:50:57",
+        "end_time": "2026-09-01 17:51:29",
+        "attributes": {
+            "shirt": "yellow",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 14,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:52:37",
+        "end_time": "2026-09-01 17:52:41",
+        "attributes": {
+            "shirt": "red",
+            "pants": "red"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 15,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:52:43",
+        "end_time": "2026-09-01 17:52:46",
+        "attributes": {
+            "shirt": "red",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 16,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-01 17:52:22",
+        "end_time": "2026-09-01 17:52:54",
+        "attributes": {
+            "shirt": "red",
+            "pants": "red"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 17,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-03 12:56:23",
+        "end_time": "2026-09-03 12:56:35",
+        "attributes": {
+            "shirt": "white",
+            "pants": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 18,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-03 12:56:24",
+        "end_time": "2026-09-03 12:56:35",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 19,
+        "track_id": 3,
+        "object_type": "person",
+        "start_time": "2026-09-03 12:58:05",
+        "end_time": "2026-09-03 12:58:06",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 20,
+        "track_id": 4,
+        "object_type": "person",
+        "start_time": "2026-09-03 12:58:06",
+        "end_time": "2026-09-03 12:58:10",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 21,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-03 12:58:05",
+        "end_time": "2026-09-03 12:58:11",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 22,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-03 12:58:05",
+        "end_time": "2026-09-03 12:58:11",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 23,
+        "track_id": 4,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:16",
+        "end_time": "2026-09-07 10:15:24",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 24,
+        "track_id": 8,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:24",
+        "end_time": "2026-09-07 10:15:25",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 25,
+        "track_id": 6,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:23",
+        "end_time": "2026-09-07 10:15:30",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 26,
+        "track_id": 47,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:34",
+        "end_time": "2026-09-07 10:15:36",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 27,
+        "track_id": 54,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:35",
+        "end_time": "2026-09-07 10:15:36",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 28,
+        "track_id": 4,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:26",
+        "end_time": "2026-09-07 10:15:38",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 29,
+        "track_id": 66,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:39",
+        "end_time": "2026-09-07 10:15:39",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 30,
+        "track_id": 50,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:34",
+        "end_time": "2026-09-07 10:15:40",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 31,
+        "track_id": 69,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:39",
+        "end_time": "2026-09-07 10:15:40",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 32,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:16",
+        "end_time": "2026-09-07 10:15:41",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 33,
+        "track_id": 82,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:42",
+        "end_time": "2026-09-07 10:15:43",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 34,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:16",
+        "end_time": "2026-09-07 10:15:44",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 35,
+        "track_id": 3,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:16",
+        "end_time": "2026-09-07 10:15:45",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 36,
+        "track_id": 93,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:44",
+        "end_time": "2026-09-07 10:15:45",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 37,
+        "track_id": 86,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:42",
+        "end_time": "2026-09-07 10:15:45",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 38,
+        "track_id": 75,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:41",
+        "end_time": "2026-09-07 10:15:45",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 39,
+        "track_id": 83,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:15:42",
+        "end_time": "2026-09-07 10:15:45",
+        "attributes": {
+            "shirt": "white",
+            "pants": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 40,
+        "track_id": 3,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:44",
+        "end_time": "2026-09-07 10:50:45",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 41,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:44",
+        "end_time": "2026-09-07 10:50:47",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 42,
+        "track_id": 6,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:46",
+        "end_time": "2026-09-07 10:50:47",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 43,
+        "track_id": 10,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:47",
+        "end_time": "2026-09-07 10:50:50",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 44,
+        "track_id": 22,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:50",
+        "end_time": "2026-09-07 10:50:51",
+        "attributes": {
+            "shirt": "red",
+            "pants": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 45,
+        "track_id": 27,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:51",
+        "end_time": "2026-09-07 10:50:53",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "red"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 46,
+        "track_id": 35,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:51",
+        "end_time": "2026-09-07 10:50:53",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 47,
+        "track_id": 33,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:51",
+        "end_time": "2026-09-07 10:50:54",
+        "attributes": {
+            "shirt": "white",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 48,
+        "track_id": 56,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:56",
+        "end_time": "2026-09-07 10:50:57",
+        "attributes": {
+            "shirt": "blue",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 49,
+        "track_id": 59,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:56",
+        "end_time": "2026-09-07 10:50:58",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 50,
+        "track_id": 55,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:55",
+        "end_time": "2026-09-07 10:50:58",
+        "attributes": {
+            "shirt": "black",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 51,
+        "track_id": 31,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:51",
+        "end_time": "2026-09-07 10:51:00",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 52,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:44",
+        "end_time": "2026-09-07 10:51:06",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 53,
+        "track_id": 86,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:04",
+        "end_time": "2026-09-07 10:51:06",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 54,
+        "track_id": 77,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:02",
+        "end_time": "2026-09-07 10:51:07",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 55,
+        "track_id": 100,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:09",
+        "end_time": "2026-09-07 10:51:09",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 56,
+        "track_id": 64,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:07",
+        "end_time": "2026-09-07 10:51:11",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 57,
+        "track_id": 98,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:08",
+        "end_time": "2026-09-07 10:51:12",
+        "attributes": {
+            "shirt": "red",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 58,
+        "track_id": 109,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:13",
+        "end_time": "2026-09-07 10:51:14",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 59,
+        "track_id": 18,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:48",
+        "end_time": "2026-09-07 10:51:23",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 60,
+        "track_id": 68,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:59",
+        "end_time": "2026-09-07 10:51:24",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 61,
+        "track_id": 128,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:25",
+        "end_time": "2026-09-07 10:51:27",
+        "attributes": {
+            "shirt": "white",
+            "pants": "red"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 62,
+        "track_id": 96,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:06",
+        "end_time": "2026-09-07 10:51:31",
+        "attributes": {
+            "shirt": "blue",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 63,
+        "track_id": 135,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:29",
+        "end_time": "2026-09-07 10:51:31",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 64,
+        "track_id": 126,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:24",
+        "end_time": "2026-09-07 10:51:32",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 65,
+        "track_id": 145,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:32",
+        "end_time": "2026-09-07 10:51:32",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 66,
+        "track_id": 118,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:22",
+        "end_time": "2026-09-07 10:51:33",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 67,
+        "track_id": 126,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:35",
+        "end_time": "2026-09-07 10:51:38",
+        "attributes": {
+            "shirt": "blue",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 68,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:09",
+        "end_time": "2026-09-07 10:51:39",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 69,
+        "track_id": 18,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:29",
+        "end_time": "2026-09-07 10:51:41",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 70,
+        "track_id": 170,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:40",
+        "end_time": "2026-09-07 10:51:41",
+        "attributes": {
+            "shirt": "black",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 71,
+        "track_id": 175,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:42",
+        "end_time": "2026-09-07 10:51:43",
+        "attributes": {
+            "shirt": "black",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 72,
+        "track_id": 55,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:03",
+        "end_time": "2026-09-07 10:51:43",
+        "attributes": {
+            "shirt": "black",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 73,
+        "track_id": 128,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:30",
+        "end_time": "2026-09-07 10:51:43",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 74,
+        "track_id": 118,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:36",
+        "end_time": "2026-09-07 10:51:44",
+        "attributes": {
+            "shirt": "blue",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 75,
+        "track_id": 7,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:50:47",
+        "end_time": "2026-09-07 10:51:44",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 76,
+        "track_id": 164,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:36",
+        "end_time": "2026-09-07 10:51:45",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 77,
+        "track_id": 18,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:43",
+        "end_time": "2026-09-07 10:51:45",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 78,
+        "track_id": 183,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:50",
+        "end_time": "2026-09-07 10:51:52",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 79,
+        "track_id": 125,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:24",
+        "end_time": "2026-09-07 10:51:54",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 80,
+        "track_id": 175,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:45",
+        "end_time": "2026-09-07 10:51:56",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 81,
+        "track_id": 188,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:54",
+        "end_time": "2026-09-07 10:51:56",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 82,
+        "track_id": 197,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:57",
+        "end_time": "2026-09-07 10:51:58",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 83,
+        "track_id": 187,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:53",
+        "end_time": "2026-09-07 10:51:59",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "yellow"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 84,
+        "track_id": 202,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:05",
+        "end_time": "2026-09-07 10:52:08",
+        "attributes": {
+            "shirt": "red",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 85,
+        "track_id": 191,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:55",
+        "end_time": "2026-09-07 10:52:08",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 86,
+        "track_id": 195,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:57",
+        "end_time": "2026-09-07 10:52:08",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 87,
+        "track_id": 188,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:51:59",
+        "end_time": "2026-09-07 10:52:12",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 88,
+        "track_id": 209,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:09",
+        "end_time": "2026-09-07 10:52:15",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 89,
+        "track_id": 208,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:09",
+        "end_time": "2026-09-07 10:52:16",
+        "attributes": {
+            "shirt": "black",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 90,
+        "track_id": 215,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:27",
+        "end_time": "2026-09-07 10:52:29",
+        "attributes": {
+            "shirt": "white",
+            "pants": "orange"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 91,
+        "track_id": 218,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:31",
+        "end_time": "2026-09-07 10:52:34",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 92,
+        "track_id": 188,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:17",
+        "end_time": "2026-09-07 10:52:35",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 93,
+        "track_id": 216,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:29",
+        "end_time": "2026-09-07 10:52:46",
+        "attributes": {
+            "shirt": "black",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 94,
+        "track_id": 225,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:39",
+        "end_time": "2026-09-07 10:52:50",
+        "attributes": {
+            "shirt": "white",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 95,
+        "track_id": 234,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:50",
+        "end_time": "2026-09-07 10:52:53",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 96,
+        "track_id": 216,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:52:48",
+        "end_time": "2026-09-07 10:52:58",
+        "attributes": {
+            "shirt": "white",
+            "pants": "white"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 97,
+        "track_id": 216,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:01",
+        "end_time": "2026-09-07 10:53:02",
+        "attributes": {
+            "shirt": "yellow",
+            "pants": "yellow"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 98,
+        "track_id": 241,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:09",
+        "end_time": "2026-09-07 10:53:10",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 99,
+        "track_id": 216,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:05",
+        "end_time": "2026-09-07 10:53:11",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "yellow"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 100,
+        "track_id": 216,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:13",
+        "end_time": "2026-09-07 10:53:14",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "yellow"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 101,
+        "track_id": 244,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:20",
+        "end_time": "2026-09-07 10:53:21",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 102,
+        "track_id": 247,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:20",
+        "end_time": "2026-09-07 10:53:24",
+        "attributes": {
+            "shirt": "gray",
+            "pants": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 103,
+        "track_id": 246,
+        "object_type": "person",
+        "start_time": "2026-09-07 10:53:15",
+        "end_time": "2026-09-07 10:53:27",
+        "attributes": {
+            "shirt": "orange",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 104,
+        "track_id": 2,
+        "object_type": "person",
+        "start_time": "2026-09-26 15:45:59",
+        "end_time": "2026-09-26 15:46:03",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 105,
+        "track_id": 1,
+        "object_type": "person",
+        "start_time": "2026-09-26 15:45:59",
+        "end_time": "2026-09-26 15:46:46",
+        "attributes": {
+            "shirt": "red",
+            "pants": "red"
+        },
+        "video_file": null
+    }
+]
