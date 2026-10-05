@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-
 class AttributeExtractor:
     def __init__(self):
         self.colors = ["black", "white", "gray", "red", "orange", "yellow", "green", "blue", "purple", "brown"]
@@ -25,7 +24,7 @@ class AttributeExtractor:
 
         # Torso (shirt) and lower body (pants) regions
         shirt_crop = crop[int(h * 0.25):int(h * 0.52), x1:x2]
-        pants_crop = crop[int(h * 0.55):int(h * 0.88), x1:x2]
+        pants_crop = crop[int(h * 0.55):int(h * 0.80),x1:x2]
 
         return {
             "shirt": self._estimate_color(shirt_crop),
