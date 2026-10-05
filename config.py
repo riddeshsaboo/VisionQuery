@@ -7,10 +7,10 @@ DEVICE = "auto"
 PROCESS_WIDTH = 704
 PROCESS_HEIGHT = 576
 
-TARGET_FPS = 2
+TARGET_FPS = 3
 
 # YOLO inference resolution
-YOLO_IMAGE_SIZE = 416
+YOLO_IMAGE_SIZE = 640
 
 # =====================================================
 # DEVICE SELECTION

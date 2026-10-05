@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisionQuery</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #111827; color: #fff; }
+    .layout { display: flex; min-height: 100vh; }
+
+    /* Navigation & Main Layout */
+    .sidebar { width: 230px; background: #0b1120; padding: 25px 15px; }
+    .logo { font-size: 24px; font-weight: bold; margin-bottom: 35px; padding-left: 10px; }
+    .menu-item { padding: 13px 15px; margin-bottom: 5px; border-radius: 8px; color: #9ca3af; cursor: pointer; }
+    .menu-item:hover, .menu-item.active { background: #1f2937; color: #fff; }
+    .main { flex: 1; padding: 30px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+    .header h1 { font-size: 30px; }
+    .header p { color: #9ca3af; margin-top: 6px; }
+
+    /* Buttons & Cards */
+    button { font-family: inherit; }
+    .add-button { background: #2563eb; color: #fff; border: none; border-radius: 8px; padding: 12px 18px; font-size: 15px; cursor: pointer; }
+    .add-button:hover { background: #1d4ed8; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 35px; }
+    .card { background: #1f2937; border-radius: 12px; padding: 20px; }
+    .card-title { color: #9ca3af; font-size: 14px; }
+    .card-value { font-size: 28px; font-weight: bold; margin-top: 10px; }
+
+    /* Camera Grid */
+    .section-title { font-size: 20px; margin-bottom: 15px; }
+    .cameras { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .camera { background: #1f2937; border-radius: 12px; overflow: hidden; }
+    .camera-screen { height: 240px; background: #030712; display: flex; align-items: center; justify-content: center; color: #6b7280; }
+    .camera-info { padding: 15px; }
+    .camera-top { display: flex; justify-content: space-between; align-items: center; }
+    .camera-name { font-weight: bold; }
+    .status { color: #22c55e; font-size: 13px; margin-top: 5px; }
+    .status.offline { color: #ef4444; }
+    .remove-button { background: transparent; border: none; color: #ef4444; cursor: pointer; font-size: 13px; }
+    .remove-button:hover { text-decoration: underline; }
+    .camera-details { margin-top: 12px; padding-top: 10px; border-top: 1px solid #374151; }
+    .camera-detail { color: #9ca3af; font-size: 13px; margin-top: 5px; }
+    .add-camera-tile { height: 300px; border: 2px dashed #374151; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #9ca3af; text-align: center; }
+    .add-camera-tile:hover { border-color: #2563eb; color: #fff; }
+    .plus { font-size: 45px; }
+
+    /* Modals & Forms */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: #1f2937; width: 430px; max-width: 90%; border-radius: 12px; padding: 25px; }
+    .modal-title { font-size: 22px; font-weight: bold; margin-bottom: 20px; }
+    .option { background: #111827; border: 1px solid #374151; border-radius: 10px; padding: 18px; margin-bottom: 12px; cursor: pointer; }
+    .option:hover { border-color: #2563eb; }
+    .option-title { font-size: 17px; font-weight: bold; }
+    .option-description { color: #9ca3af; font-size: 13px; margin-top: 5px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 6px; color: #d1d5db; font-size: 14px; }
+    .form-group input, .form-group select { width: 100%; padding: 11px; background: #111827; border: 1px solid #374151; border-radius: 7px; color: #fff; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: #2563eb; }
+    .connection-method { display: flex; gap: 20px; margin-bottom: 18px; }
+    .connection-method label { display: flex; align-items: center; gap: 7px; color: #d1d5db; cursor: pointer; }
+    .form-buttons { display: flex; gap: 10px; margin-top: 20px; }
+    .form-buttons button, .modal-cancel { width: 100%; padding: 11px; border: none; border-radius: 7px; cursor: pointer; }
+    .cancel { background: #374151; color: #fff; }
+    .cancel:hover { background: #4b5563; }
+    .save { background: #2563eb; color: #fff; }
+    .save:hover { background: #1d4ed8; }
+    .warning { color: #d1d5db; line-height: 1.5; margin-bottom: 20px; }
+    .delete-button { background: #dc2626; color: #fff; }
+    .delete-button:hover { background: #b91c1c; }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 180px; }
+      .stats, .cameras { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">VisionQuery</div>
+    <div class="menu-item active">Dashboard</div>
+    <div class="menu-item">Cameras</div>
+    <div class="menu-item">Events</div>
+    <div class="menu-item">Search</div>
+    <div class="menu-item">NVR</div>
+    <div class="menu-item">Settings</div>
+  </aside>
+
+  <!-- Main View -->
+  <main class="main">
+    <div class="header">
+      <div>
+        <h1>Dashboard</h1>
+        <p>VisionQuery Surveillance Analytics</p>
+      </div>
+      <button class="add-button" onclick="openCameraTypeModal()">+ Add Camera</button>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats">
+      <div class="card"><div class="card-title">Cameras</div><div class="card-value" id="cameraCount">0</div></div>
+      <div class="card"><div class="card-title">Online</div><div class="card-value" id="onlineCount">0</div></div>
+      <div class="card"><div class="card-title">Camera Capacity</div><div class="card-value" id="cameraCapacity">-</div></div>
+      <div class="card"><div class="card-title">Events Today</div><div class="card-value">0</div></div>
+    </div>
+
+    <!-- Camera List -->
+    <h2 class="section-title">Connected Cameras</h2>
+    <div class="cameras" id="cameraGrid"></div>
+  </main>
+</div>
+
+<!-- Camera Selector Modal -->
+<div class="modal" id="cameraTypeModal">
+  <div class="modal-content">
+    <div class="modal-title">Add Camera</div>
+    <div class="option" onclick="showIPCameraForm()">
+      <div class="option-title">📹 IP Camera</div>
+      <div class="option-description">Add an RTSP network camera</div>
+    </div>
+    <div class="option" onclick="showWebcamForm()">
+      <div class="option-title">💻 Webcam</div>
+      <div class="option-description">Add a built-in or USB webcam</div>
+    </div>
+    <button type="button" class="cancel modal-cancel" onclick="closeModals()">Cancel</button>
+  </div>
+</div>
+
+<!-- IP Camera Modal -->
+<div class="modal" id="ipCameraModal">
+  <div class="modal-content">
+    <div class="modal-title">Add IP Camera</div>
+    <form id="ipCameraForm">
+      <div class="form-group">
+        <label>Camera Name</label>
+        <input type="text" id="ipCameraName" placeholder="e.g. Front Gate" required>
+      </div>
+      <div class="form-group">
+        <label>Connection Method</label>
+        <div class="connection-method">
+          <label><input type="radio" name="connectionMethod" value="rtsp" checked onchange="updateIPFields()"> RTSP URL</label>
+          <label><input type="radio" name="connectionMethod" value="credentials" onchange="updateIPFields()"> IP + Credentials</label>
+        </div>
+      </div>
+      <div id="rtspFields">
+        <div class="form-group">
+          <label>RTSP URL</label>
+          <input type="text" id="rtspUrl" placeholder="rtsp://192.168.1.100:554/...">
+        </div>
+        <div class="form-group">
+          <label>NVR Channel Number</label>
+          <input type="number" id="rtspNvrChannel" min="1" placeholder="e.g. 1">
+        </div>
+      </div>
+      <div id="credentialFields" style="display:none;">
+        <div class="form-group">
+          <label>IP Address</label>
+          <input type="text" id="cameraIP" placeholder="192.168.1.100">
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="cameraUsername" placeholder="admin">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="cameraPassword" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label>NVR Channel Number</label>
+          <input type="number" id="credNvrChannel" min="1" placeholder="e.g. 1">
+        </div>
+      </div>
+      <div class="form-buttons">
+        <button type="button" class="cancel" onclick="closeModals()">Cancel</button>
+        <button type="submit" class="save">Add Camera</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Webcam Modal -->
+<div class="modal" id="webcamModal">
+  <div class="modal-content">
+    <div class="modal-title">Add Webcam</div>
+    <form id="webcamForm">
+      <div class="form-group">
+        <label>Camera Name</label>
+        <input type="text" id="webcamName" placeholder="e.g. Laptop Camera" required>
+      </div>
+      <div class="form-group">
+        <label>Webcam Device</label>
+        <select id="webcamDevice">
+          <option value="0">Default Webcam</option>
+          <option value="1">Webcam 1</option>
+          <option value="2">Webcam 2</option>
+        </select>
+      </div>
+      <div class="form-buttons">
+        <button type="button" class="cancel" onclick="closeModals()">Cancel</button>
+        <button type="submit" class="save">Add Camera</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Remove Camera Confirmation Modal -->
+<div class="modal" id="removeModal">
+  <div class="modal-content">
+    <div class="modal-title">Remove Camera</div>
+    <div class="warning">
+      Are you sure you want to remove <strong id="removeCameraName">this camera</strong>?<br><br>
+      This will remove the camera from VisionQuery.
+    </div>
+    <div class="form-buttons">
+      <button class="cancel" onclick="closeModals()">Cancel</button>
+      <button class="delete-button" onclick="confirmRemoveCamera()">Remove Camera</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let cameraToRemove = null;
+
+// Modal Controls
+function openCameraTypeModal() { document.getElementById("cameraTypeModal").style.display = "flex"; }
+function closeModals() { document.querySelectorAll(".modal").forEach(m => m.style.display = "none"); }
+
+function showIPCameraForm() {
+  closeModals();
+  document.getElementById("ipCameraModal").style.display = "flex";
+  updateIPFields();
+}
+
+function updateIPFields() {
+  const isRtsp = document.querySelector('input[name="connectionMethod"]:checked').value === "rtsp";
+  document.getElementById("rtspFields").style.display = isRtsp ? "block" : "none";
+  document.getElementById("credentialFields").style.display = isRtsp ? "none" : "block";
+}
+
+function showWebcamForm() {
+  closeModals();
+  document.getElementById("webcamModal").style.display = "flex";
+}
+
+// Add IP Camera
+document.getElementById("ipCameraForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const method = document.querySelector('input[name="connectionMethod"]:checked').value;
+  const channel = method === "rtsp" ? document.getElementById("rtspNvrChannel").value : document.getElementById("credNvrChannel").value;
+
+  const data = {
+    name: document.getElementById("ipCameraName").value.trim(),
+    type: "ip",
+    connection_method: method,
+    rtsp_url: document.getElementById("rtspUrl").value.trim(),
+    ip: document.getElementById("cameraIP").value.trim(),
+    username: document.getElementById("cameraUsername").value.trim(),
+    password: document.getElementById("cameraPassword").value,
+    nvr_channel: channel
+  };
+
+  const res = await fetch("/api/cameras", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+  if (!res.ok) return alert(result.error || "Failed to add camera");
+
+  closeModals();
+  document.getElementById("ipCameraForm").reset();
+  loadCameras();
+  loadSystemInfo();
+});
+
+// Add Webcam
+document.getElementById("webcamForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById("webcamName").value.trim(),
+    type: "webcam",
+    device: document.getElementById("webcamDevice").value
+  };
+
+  const res = await fetch("/api/cameras", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+  if (!res.ok) return alert(result.error || "Failed to add webcam");
+
+  closeModals();
+  document.getElementById("webcamForm").reset();
+  loadCameras();
+});
+
+// Render Camera Grid & Stats
+async function loadCameras() {
+  const grid = document.getElementById("cameraGrid");
+  if (!grid) return;
+
+  const res = await fetch("/api/cameras");
+  const cameras = await res.json();
+  grid.innerHTML = "";
+
+  cameras.forEach(cam => {
+    const card = document.createElement("div");
+    card.className = "camera";
+    const statusClass = cam.status === "online" ? "" : "offline";
+    const details = cam.type === "ip"
+      ? `<div class="camera-detail">Type: IP Camera</div>
+         <div class="camera-detail">IP: ${cam.ip || "From RTSP URL"}</div>
+         <div class="camera-detail">Connection: ${cam.connection_method === "rtsp" ? "RTSP URL" : "IP + Credentials"}</div>
+         <div class="camera-detail">NVR Channel: ${cam.nvr_channel || "-"}</div>`
+      : `<div class="camera-detail">Type: Webcam</div>
+         <div class="camera-detail">Device: ${cam.device}</div>`;
+
+    card.innerHTML = `
+  <div class="camera-screen">
+    <img
+      src="/video_feed/${cam.id}"
+      style="
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      "
+      onerror="this.style.display='none';"
+    >
+  </div>
+
+  <div class="camera-info">
+    <div class="camera-top">
+      <div class="camera-name">${cam.name}</div>
+      <button
+        class="remove-button"
+        onclick="openRemoveCamera(${cam.id}, '${escapeQuotes(cam.name)}')"
+      >
+        Remove
+      </button>
+    </div>
+
+    <div class="status ${statusClass}">● ${cam.status}</div>
+    <div class="camera-details">${details}</div>
+  </div>
+`;
+
+grid.appendChild(card);
+  });
+
+  const addTile = document.createElement("div");
+  addTile.className = "add-camera-tile";
+  addTile.onclick = openCameraTypeModal;
+  addTile.innerHTML = `<div><div class="plus">+</div><div>Add Camera</div></div>`;
+  grid.appendChild(addTile);
+
+  document.getElementById("cameraCount").innerText = cameras.length;
+  document.getElementById("onlineCount").innerText = cameras.filter(c => c.status === "online").length;
+}
+
+// Remove Camera
+function openRemoveCamera(id, name) {
+  cameraToRemove = id;
+  document.getElementById("removeCameraName").innerText = name;
+  document.getElementById("removeModal").style.display = "flex";
+}
+
+async function confirmRemoveCamera() {
+  if (cameraToRemove === null) return;
+  const res = await fetch(`/api/cameras/${cameraToRemove}`, { method: "DELETE" });
+  const result = await res.json();
+  if (!res.ok) return alert(result.error || "Failed to remove camera");
+
+  cameraToRemove = null;
+  closeModals();
+  loadCameras();
+  loadSystemInfo();
+}
+
+function escapeQuotes(val) {
+  return String(val).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+}
+
+async function loadSystemInfo() {
+  try {
+    const res = await fetch("/api/system");
+    const system = await res.json();
+    document.getElementById("cameraCapacity").innerText = `${system.added_cameras} / ${system.max_cameras || "-"}`;
+
+    console.log(system.cameras);
+    
+  } catch (err) {
+    console.error("System info fetch failed", err);
+  }
+}
+
+// Init
+loadSystemInfo();
+loadCameras();
+
+setInterval(
+    loadCameras,
+    3000
+);
+</script>
+</body>
+</html>

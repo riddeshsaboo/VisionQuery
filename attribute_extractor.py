@@ -3,176 +3,81 @@ import numpy as np
 
 
 class AttributeExtractor:
-
     def __init__(self):
-        self.color_ranges = {
-            "black": (0, 50),
-            "gray": (50, 120),
-            "white": (200, 255),
-        }
-
-    # =====================================================
-    # MAIN EXTRACTION FUNCTION
-    # =====================================================
+        self.colors = ["black", "white", "gray", "red", "orange", "yellow", "green", "blue", "purple", "brown"]
 
     def extract(self, crop, object_type):
-        """
-        Extract attributes from the best crop of a tracked object.
-
-        Person:
-            shirt
-            pants
-
-        Vehicle:
-            color
-        """
-
         if crop is None or crop.size == 0:
             return {}
-
-        # -------------------------------------------------
-        # PERSON
-        # -------------------------------------------------
-
         if object_type == "person":
             return self._extract_person(crop)
-
-        # -------------------------------------------------
-        # VEHICLES
-        # -------------------------------------------------
-
         if object_type in ["car", "motorcycle", "bus", "truck"]:
-            return {
-                "color": self._estimate_color(crop)
-            }
-
-        # -------------------------------------------------
-        # OTHER OBJECTS
-        # -------------------------------------------------
-
+            return {"color": self._estimate_color(crop)}
         return {}
 
-    # =====================================================
-    # PERSON ATTRIBUTES
-    # =====================================================
-
     def _extract_person(self, crop):
+        h, w = crop.shape[:2]
+        if h < 30 or w < 15:
+            return {"shirt": "unknown", "pants": "unknown"}
 
-        height, width = crop.shape[:2]
+        # Inset horizontal boundaries to avoid background
+        x1, x2 = int(w * 0.15), int(w * 0.85)
 
-        # Divide the person crop vertically.
-        #
-        # Upper ~45%  -> shirt
-        # Lower ~45%  -> pants
-        #
-        # Ignore small regions near the very top/bottom.
-
-        shirt_end = int(height * 0.45)
-
-        pants_start = int(height * 0.50)
-
-        shirt_crop = crop[
-            int(height * 0.15):shirt_end,
-            int(width * 0.15):int(width * 0.85)
-        ]
-
-        pants_crop = crop[
-            pants_start:int(height * 0.90),
-            int(width * 0.15):int(width * 0.85)
-        ]
-
-        shirt_color = self._estimate_color(shirt_crop)
-
-        pants_color = self._estimate_color(pants_crop)
-
-        # -------------------------------------------------
-        # Backpack
-        #
-        # We are NOT guessing backpack presence using
-        # random image heuristics yet.
-        #
-        # This will later be replaced by a proper detector.
-        # -------------------------------------------------
+        # Torso (shirt) and lower body (pants) regions
+        shirt_crop = crop[int(h * 0.25):int(h * 0.52), x1:x2]
+        pants_crop = crop[int(h * 0.55):int(h * 0.88), x1:x2]
 
         return {
-            "shirt": shirt_color,
-            "pants": pants_color,
+            "shirt": self._estimate_color(shirt_crop),
+            "pants": self._estimate_color(pants_crop),
         }
 
-    # =====================================================
-    # COLOR ESTIMATION
-    # =====================================================
-
     def _estimate_color(self, crop):
-
         if crop is None or crop.size == 0:
+            return "unknown"
+
+        h, w = crop.shape[:2]
+        if h < 5 or w < 5:
+            return "unknown"
+
+        # Crop edges to reduce boundary noise
+        bx, by = max(1, int(w * 0.08)), max(1, int(h * 0.08))
+        crop = crop[by:h - by, bx:w - bx]
+        if crop.size == 0:
             return "unknown"
 
         hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
+        h_channel, s, v = hsv[:, :, 0], hsv[:, :, 1], hsv[:, :, 2]
 
-        pixels = hsv.reshape(-1, 3)
-
-        h = pixels[:, 0]
-        s = pixels[:, 1]
-        v = pixels[:, 2]
-
-        # -------------------------------------------------
-        # BLACK
-        # -------------------------------------------------
-
-        black_mask = v < 50
-
-        if np.mean(black_mask) > 0.35:
+        # Achromatic & brown checks
+        if np.mean((v < 75) & (s < 90)) > 0.35:
             return "black"
-
-        # -------------------------------------------------
-        # WHITE
-        # -------------------------------------------------
-
-        white_mask = (s < 40) & (v > 180)
-
-        if np.mean(white_mask) > 0.35:
+        if np.mean((s < 45) & (v > 175)) > 0.40:
             return "white"
-
-        # -------------------------------------------------
-        # GRAY
-        # -------------------------------------------------
-
-        gray_mask = (s < 50) & (v >= 50) & (v <= 180)
-
-        if np.mean(gray_mask) > 0.35:
+        if np.mean((s < 45) & (v >= 75) & (v <= 175)) > 0.40:
             return "gray"
+        if np.mean((h_channel >= 5) & (h_channel < 25) & (s > 50) & (v < 150)) > 0.25:
+            return "brown"
 
-        # -------------------------------------------------
-        # COLORED OBJECT
-        # -------------------------------------------------
-
-        valid = s > 50
-
-        if np.sum(valid) == 0:
+        # Dominant hue detection for chromatic colors
+        color_mask = (s > 55) & (v > 45)
+        if np.sum(color_mask) < 10:
             return "unknown"
 
-        dominant_hue = np.median(h[valid])
+        hist = cv2.calcHist([h_channel.astype(np.uint8)], [0], color_mask.astype(np.uint8), [180], [0, 180])
+        hue = int(np.argmax(hist))
 
-        # OpenCV hue range = 0-179
-
-        if dominant_hue < 10 or dominant_hue >= 170:
+        # Hue mapping
+        if hue < 10 or hue >= 170:
             return "red"
-
-        elif dominant_hue < 25:
+        elif hue < 20:
             return "orange"
-
-        elif dominant_hue < 35:
+        elif hue < 38:
             return "yellow"
-
-        elif dominant_hue < 85:
+        elif hue < 85:
             return "green"
-
-        elif dominant_hue < 130:
+        elif hue < 135:
             return "blue"
-
-        elif dominant_hue < 160:
+        elif hue < 165:
             return "purple"
-
-        else:
-            return "red"
+        return "red"
