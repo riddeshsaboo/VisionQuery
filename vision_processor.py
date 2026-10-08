@@ -61,7 +61,8 @@ class VisionProcessor:
 
             inference_frame = self._prepare_inference_frame(frame)
             results = self._run_inference(inference_frame)
-            self._process_tracks(results, inference_frame)
+            media_time = self.camera_connection.get_media_time()
+            self._process_tracks(results,inference_frame,media_time)
             self._update_detection_display(results)
 
     def _check_motion(self, frame):
@@ -84,10 +85,20 @@ class VisionProcessor:
         with ModelManager.get_lock():
             return self.model.track(frame,tracker="bytetrack.yaml",persist=True,imgsz=YOLO_IMAGE_SIZE,classes=[0, 2, 3, 5, 7],verbose=False)
 
-    def _process_tracks(self, results, frame):
-        for track in self.track_manager.update(results, frame):
-            track["camera_id"] = self.camera_id
-            track["attributes"] = self.attribute_extractor.extract(track["best_crop"], track["object_type"])
+    def _process_tracks(self, results, frame, media_time):
+        cfg = self.camera_connection.camera_config
+        src_type = cfg.get("type")
+
+        for track in self.track_manager.update(results, frame, media_time):
+            track.update({
+                "camera_id": self.camera_id,
+                "camera_name": cfg.get("name"),
+                "source_type": src_type,
+                "nvr_ip": cfg.get("nvr_ip") if src_type == "ip" else None,
+                "nvr_channel": cfg.get("nvr_channel") if src_type == "ip" else None,
+                "video_file": self.camera_connection.get_video_file() if src_type == "video" else None,
+                "attributes": self.attribute_extractor.extract_multiple(track["attribute_crops"],track["object_type"]),
+            })
             self.event_manager.save_event(track)
 
     def _update_display(self, frame, message):

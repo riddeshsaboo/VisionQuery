@@ -3,15 +3,17 @@ import cv2
 
 
 class TrackManager:
-    def __init__(self, disappearance_timeout=2.0, min_confirm_frames=2):
+    def __init__(self, disappearance_timeout=2.0, min_confirm_frames=3):
         self.disappearance_timeout = disappearance_timeout
         self.min_confirm_frames = min_confirm_frames
         self.active_tracks = {}
 
-    def update(self, results, frame):
+    def update(self, results, frame, media_time=None):
         current_time = time.time()
-        current_track_ids = set()
+        if media_time is None:
+            media_time = current_time
 
+        current_track_ids = set()
         if not results:
             return []
 
@@ -38,9 +40,9 @@ class TrackManager:
 
             quality = self._calculate_crop_quality(crop)
             if track_id not in self.active_tracks:
-                self._create_track(track_id, result.names[class_id], current_time, quality, crop, bbox)
+                self._create_track(track_id, result.names[class_id], current_time, media_time, quality, crop, bbox)
             else:
-                self._update_track(track_id, current_time, quality, crop, bbox)
+                self._update_track(track_id, current_time, media_time, quality, crop, bbox)
 
         return self._remove_missing_tracks(current_track_ids, current_time)
 
@@ -57,23 +59,27 @@ class TrackManager:
         sharpness = cv2.Laplacian(gray, cv2.CV_64F).var()
         return area * sharpness
 
-    def _create_track(self, track_id, object_type, current_time, quality, crop, bbox):
+    def _create_track(self, track_id, object_type, current_time, media_time, quality, crop, bbox):
         self.active_tracks[track_id] = {
             "track_id": track_id,
             "object_type": object_type,
             "first_seen": current_time,
             "last_seen": current_time,
+            "first_media_time": media_time,
+            "last_media_time": media_time,
             "frames_seen": 1,
             "confirmed": False,
             "best_quality": quality,
             "best_crop": crop.copy(),
             "best_bbox": bbox,
+            "attribute_crops": [(quality, crop.copy())],
         }
         print(f"[NEW TRACK] ID={track_id} Object={object_type}")
 
-    def _update_track(self, track_id, current_time, quality, crop, bbox):
+    def _update_track(self, track_id, current_time, media_time, quality, crop, bbox):
         track = self.active_tracks[track_id]
         track["last_seen"] = current_time
+        track["last_media_time"] = media_time
         track["frames_seen"] += 1
 
         if not track["confirmed"] and track["frames_seen"] >= self.min_confirm_frames:
@@ -84,6 +90,11 @@ class TrackManager:
             track["best_quality"] = quality
             track["best_crop"] = crop.copy()
             track["best_bbox"] = bbox
+
+        # Keep the 5 highest-quality crops for attribute extraction
+        track["attribute_crops"].append((quality, crop.copy()))
+        track["attribute_crops"].sort(key=lambda x: x[0], reverse=True)
+        track["attribute_crops"] = track["attribute_crops"][:10]
 
     def _remove_missing_tracks(self, current_track_ids, current_time):
         completed_tracks = []

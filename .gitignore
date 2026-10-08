@@ -13,4 +13,8 @@ venv/
 .vscode/
 
 # Environment/secrets
-.env
+.envuploads/
+
+uploads/
+
+events.json

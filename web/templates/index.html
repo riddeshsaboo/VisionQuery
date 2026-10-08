@@ -125,6 +125,10 @@
       <div class="option-title">💻 Webcam</div>
       <div class="option-description">Add a built-in or USB webcam</div>
     </div>
+    <div class="option" onclick="showVideoForm()">
+      <div class="option-title">🎞️ Video File</div>
+      <div class="option-description">Upload a recorded video for analysis</div>
+    </div>
     <button type="button" class="cancel modal-cancel" onclick="closeModals()">Cancel</button>
   </div>
 </div>
@@ -151,8 +155,24 @@
           <input type="text" id="rtspUrl" placeholder="rtsp://192.168.1.100:554/...">
         </div>
         <div class="form-group">
+          <label>NVR IP Address</label>
+          <input
+            type="text"
+            id="rtspNvrIp"
+            placeholder="192.168.0.112"
+            required
+          >
+        </div>
+
+        <div class="form-group">
           <label>NVR Channel Number</label>
-          <input type="number" id="rtspNvrChannel" min="1" placeholder="e.g. 1">
+          <input
+            type="number"
+            id="rtspNvrChannel"
+            min="1"
+            placeholder="e.g. 1"
+            required
+          >
         </div>
       </div>
       <div id="credentialFields" style="display:none;">
@@ -169,8 +189,24 @@
           <input type="password" id="cameraPassword" placeholder="Password">
         </div>
         <div class="form-group">
+          <label>NVR IP Address</label>
+          <input
+            type="text"
+            id="credNvrIp"
+            placeholder="192.168.0.112"
+            required
+          >
+        </div>
+
+        <div class="form-group">
           <label>NVR Channel Number</label>
-          <input type="number" id="credNvrChannel" min="1" placeholder="e.g. 1">
+          <input
+            type="number"
+            id="credNvrChannel"
+            min="1"
+            placeholder="e.g. 1"
+            required
+          >
         </div>
       </div>
       <div class="form-buttons">
@@ -206,6 +242,52 @@
   </div>
 </div>
 
+<!-- Video File Modal -->
+<div class="modal" id="videoModal">
+  <div class="modal-content">
+    <div class="modal-title">Add Video File</div>
+
+    <form id="videoForm">
+      <div class="form-group">
+        <label>Video Name</label>
+        <input
+          type="text"
+          id="videoName"
+          placeholder="e.g. Parking Lot Recording"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Video File</label>
+        <input
+          type="file"
+          id="videoFile"
+          accept=".mp4,.avi,.mov,.mkv,.webm"
+          required
+        >
+      </div>
+
+      <div class="form-buttons">
+        <button
+          type="button"
+          class="cancel"
+          onclick="closeModals()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="save"
+        >
+          Upload & Process
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <!-- Remove Camera Confirmation Modal -->
 <div class="modal" id="removeModal">
   <div class="modal-content">
@@ -235,9 +317,22 @@ function showIPCameraForm() {
 }
 
 function updateIPFields() {
-  const isRtsp = document.querySelector('input[name="connectionMethod"]:checked').value === "rtsp";
-  document.getElementById("rtspFields").style.display = isRtsp ? "block" : "none";
-  document.getElementById("credentialFields").style.display = isRtsp ? "none" : "block";
+  const isRtsp =
+    document.querySelector('input[name="connectionMethod"]:checked').value === "rtsp";
+
+  const rtspFields = document.getElementById("rtspFields");
+  const credentialFields = document.getElementById("credentialFields");
+
+  rtspFields.style.display = isRtsp ? "block" : "none";
+  credentialFields.style.display = isRtsp ? "none" : "block";
+
+  rtspFields.querySelectorAll("input").forEach(input => {
+    input.disabled = !isRtsp;
+  });
+
+  credentialFields.querySelectorAll("input").forEach(input => {
+    input.disabled = isRtsp;
+  });
 }
 
 function showWebcamForm() {
@@ -245,11 +340,24 @@ function showWebcamForm() {
   document.getElementById("webcamModal").style.display = "flex";
 }
 
+function showVideoForm() {
+  closeModals();
+  document.getElementById("videoModal").style.display = "flex";
+}
+
 // Add IP Camera
 document.getElementById("ipCameraForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const method = document.querySelector('input[name="connectionMethod"]:checked').value;
-  const channel = method === "rtsp" ? document.getElementById("rtspNvrChannel").value : document.getElementById("credNvrChannel").value;
+  const channel =
+  method === "rtsp"
+    ? document.getElementById("rtspNvrChannel").value
+    : document.getElementById("credNvrChannel").value;
+
+const nvrIp =
+  method === "rtsp"
+    ? document.getElementById("rtspNvrIp").value.trim()
+    : document.getElementById("credNvrIp").value.trim();
 
   const data = {
     name: document.getElementById("ipCameraName").value.trim(),
@@ -259,7 +367,8 @@ document.getElementById("ipCameraForm").addEventListener("submit", async (e) => 
     ip: document.getElementById("cameraIP").value.trim(),
     username: document.getElementById("cameraUsername").value.trim(),
     password: document.getElementById("cameraPassword").value,
-    nvr_channel: channel
+    nvr_channel: channel,
+    nvr_ip: nvrIp,
   };
 
   const res = await fetch("/api/cameras", {
@@ -300,6 +409,64 @@ document.getElementById("webcamForm").addEventListener("submit", async (e) => {
   loadCameras();
 });
 
+// Add Video File
+document.getElementById("videoForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("videoName").value.trim();
+  const file = document.getElementById("videoFile").files[0];
+
+  if (!file) {
+    return alert("Please select a video file");
+  }
+
+  const formData = new FormData();
+
+  formData.append("video", file);
+
+  const uploadRes = await fetch("/api/videos", {
+    method: "POST",
+    body: formData
+  });
+
+  const uploadResult = await uploadRes.json();
+
+  if (!uploadRes.ok) {
+    return alert(
+      uploadResult.error || "Video upload failed"
+    );
+  }
+
+  const cameraData = {
+    name: name,
+    type: "video",
+    video_file: `uploads/${uploadResult.filename}`
+  };
+
+  const cameraRes = await fetch("/api/cameras", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(cameraData)
+  });
+
+  const cameraResult = await cameraRes.json();
+
+  if (!cameraRes.ok) {
+    return alert(
+      cameraResult.error || "Failed to add video"
+    );
+  }
+
+  closeModals();
+
+  document.getElementById("videoForm").reset();
+
+  loadCameras();
+  loadSystemInfo();
+});
+
 // Render Camera Grid & Stats
 async function loadCameras() {
   const grid = document.getElementById("cameraGrid");
@@ -313,13 +480,42 @@ async function loadCameras() {
     const card = document.createElement("div");
     card.className = "camera";
     const statusClass = cam.status === "online" ? "" : "offline";
-    const details = cam.type === "ip"
-      ? `<div class="camera-detail">Type: IP Camera</div>
-         <div class="camera-detail">IP: ${cam.ip || "From RTSP URL"}</div>
-         <div class="camera-detail">Connection: ${cam.connection_method === "rtsp" ? "RTSP URL" : "IP + Credentials"}</div>
-         <div class="camera-detail">NVR Channel: ${cam.nvr_channel || "-"}</div>`
-      : `<div class="camera-detail">Type: Webcam</div>
-         <div class="camera-detail">Device: ${cam.device}</div>`;
+    let details;
+
+    if (cam.type === "ip") {
+      details = `
+        <div class="camera-detail">Type: IP Camera</div>
+        <div class="camera-detail">IP: ${cam.ip || "From RTSP URL"}</div>
+        <div class="camera-detail">
+          Connection:
+          ${cam.connection_method === "rtsp"
+            ? "RTSP URL"
+            : "IP + Credentials"}
+        </div>
+        <div class="camera-detail">
+          NVR IP: ${cam.nvr_ip || "-"}
+        </div>
+        <div class="camera-detail">
+          NVR Channel: ${cam.nvr_channel || "-"}
+        </div>
+      `;
+    }
+    else if (cam.type === "video") {
+      details = `
+        <div class="camera-detail">Type: Video File</div>
+        <div class="camera-detail">
+          File: ${cam.video_file || "-"}
+        </div>
+      `;
+    }
+    else {
+      details = `
+        <div class="camera-detail">Type: Webcam</div>
+        <div class="camera-detail">
+          Device: ${cam.device}
+        </div>
+      `;
+    }
 
     card.innerHTML = `
   <div class="camera-screen">

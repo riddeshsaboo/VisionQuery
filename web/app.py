@@ -4,8 +4,8 @@ import platform
 import time
 import cv2
 import psutil
-from flask import Flask, Response, jsonify, render_template, request
-
+from flask import Flask, Response, jsonify, render_template, request, send_from_directory
+from werkzeug.utils import secure_filename
 from camera_manager import CameraConnection
 
 try:
@@ -16,7 +16,10 @@ except ImportError:
 app = Flask(__name__)
 camera_connections = {}
 CAMERAS_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "cameras.json")
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(__file__)),"uploads",)
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Storage & startup
 def load_cameras():
@@ -128,7 +131,7 @@ def add_camera():
 
     if not name:
         return jsonify({"error": "Camera name is required"}), 400
-    if cam_type not in {"ip", "webcam"}:
+    if cam_type not in {"ip", "webcam", "video"}:
         return jsonify({"error": "Invalid camera type"}), 400
 
     cameras = load_cameras()
@@ -137,10 +140,22 @@ def add_camera():
         return jsonify({"error": f"Max camera limit reached ({capacity['max_cameras']})."}), 409
 
     cid = (max(c["id"] for c in cameras) + 1) if cameras else 1
-    camera = _build_ip_camera(data, cid, name) if cam_type == "ip" else _build_webcam_camera(data, cid, name)
 
-    if isinstance(camera, tuple):
-        return camera
+
+    if cam_type == "ip":
+        camera = _build_ip_camera(data,cid,name)
+        if isinstance(camera, tuple):
+            return camera
+
+    elif cam_type == "webcam":
+        camera = _build_webcam_camera(data,cid,name)
+        if isinstance(camera, tuple):
+            return camera
+
+    else:
+        camera = _build_video_camera(data,cid,name)
+        if isinstance(camera, tuple):
+            return camera
 
     cameras.append(camera)
     save_cameras(cameras)
@@ -169,9 +184,15 @@ def _build_ip_camera(data, cid, name):
             return jsonify({"error": "IP, username, and password are required"}), 400
         cam.update({"rtsp_url": "", "ip": ip, "username": user, "password": pwd})
 
+    nvr_ip = data.get("nvr_ip", "").strip()
+    if not nvr_ip:
+        return jsonify({"error": "NVR IP address is required"}), 400
+    cam["nvr_ip"] = nvr_ip
+
     try:
         nvr_ch = int(data.get("nvr_channel"))
-        if nvr_ch < 1: raise ValueError
+        if nvr_ch < 1:
+            raise ValueError
         cam["nvr_channel"] = nvr_ch
     except (TypeError, ValueError):
         return jsonify({"error": "Valid NVR channel number is required"}), 400
@@ -188,6 +209,23 @@ def _build_webcam_camera(data, cid, name):
 
     return {"id": cid, "name": name, "type": "webcam", "device": dev, "status": "offline"}
 
+def _build_video_camera(data, camera_id, name):
+    video_file = data.get("video_file", "").strip()
+
+    if not video_file:
+        return jsonify({
+            "error": "Video file is required"
+        }), 400
+
+    return {
+        "id": camera_id,
+        "name": name,
+        "type": "video",
+        "video_file": video_file,
+        "nvr_ip": None,
+        "nvr_channel": None,
+        "status": "offline",
+    }
 
 @app.route("/api/cameras/<int:camera_id>", methods=["DELETE"])
 def delete_camera(camera_id):
@@ -210,6 +248,64 @@ def video_feed(camera_id):
     return Response(generate_camera_frames(camera_id), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 
+@app.route("/api/videos", methods=["POST"])
+def upload_video():
+    if "video" not in request.files or not request.files["video"].filename:
+        return jsonify({"error": "No video file provided"}), 400
+
+    file = request.files["video"]
+    filename = secure_filename(file.filename)
+    base_name, ext = os.path.splitext(filename)
+
+    allowed_exts = {".mp4", ".avi", ".mov", ".mkv", ".webm"}
+    if ext.lower() not in allowed_exts:
+        return jsonify({"error": "Unsupported video format. Use MP4, AVI, MOV, MKV or WEBM."}), 400
+
+    # Ensure unique filename
+    dest_dir = app.config["UPLOAD_FOLDER"]
+    final_filename, counter = filename, 1
+    while os.path.exists(os.path.join(dest_dir, final_filename)):
+        final_filename = f"{base_name}_{counter}{ext}"
+        counter += 1
+
+    file_path = os.path.join(dest_dir, final_filename)
+    file.save(file_path)
+
+    return jsonify({"success": True, "filename": final_filename, "path": file_path}), 201
+
+@app.route("/api/events", methods=["GET"])
+def get_events():
+    events_file = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        "events.json",
+    )
+
+    if not os.path.exists(events_file):
+        return jsonify([])
+
+    try:
+        with open(events_file, "r") as file:
+            events = json.load(file)
+
+        return jsonify(events)
+
+    except (json.JSONDecodeError, OSError):
+        return jsonify({
+            "error": "Unable to read events"
+        }), 500
+
+@app.route("/videos/<path:filename>", methods=["GET"])
+def serve_video(filename):
+    uploads_folder = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)),
+        "uploads",
+    )
+
+    return send_from_directory(
+        uploads_folder,
+        filename,
+    )
+
 if __name__ == "__main__":
     start_all_cameras()
-    app.run(debug=True, use_reloader=False)
+    app.run(host="0.0.0.0",port=5001,debug=True,use_reloader=False)

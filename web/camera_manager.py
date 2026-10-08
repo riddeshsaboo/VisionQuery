@@ -23,9 +23,13 @@ class CameraConnection:
         self.thread = None
         self.vision_processor = None
 
+        self.video_fps = 25.0
+
     def get_source(self):
         if self.camera_type == "webcam":
             return self.camera_config.get("device", 0)
+        if self.camera_type == "video":
+            return self.camera_config.get("video_file")
 
         method = self.camera_config.get("connection_method")
         if method == "rtsp":
@@ -51,34 +55,25 @@ class CameraConnection:
         while self.running:
             try:
                 print(f"[CAMERA {self.camera_id}] Connecting...")
-                self.cap = (
-                    cv2.VideoCapture(source)
-                    if self.camera_type == "webcam"
-                    else cv2.VideoCapture(source, cv2.CAP_FFMPEG)
-                )
+                self._open_capture(source)
 
                 if not self.cap.isOpened():
                     print(f"[CAMERA {self.camera_id}] Connection failed")
                     self.status = "offline"
                     self._release()
+                    if self.camera_type == "video":
+                        self.running = False
+                        break
                     time.sleep(3)
                     continue
 
-                print(f"[CAMERA {self.camera_id}] ONLINE")
-                self.status = "online"
-                self.vision_processor = VisionProcessor(self, self.camera_id)
-                self.vision_processor.start()
-
-                while self.running:
-                    ret, frame = self.cap.read()
-                    if not ret:
-                        print(f"[CAMERA {self.camera_id}] Stream lost")
-                        self.status = "offline"
-                        break
-                    with self.lock:
-                        self.frame = frame
-
+                self._start_processing()
+                self._read_frames()
                 self._release()
+
+                if self.camera_type == "video":
+                    self.running = False
+                    break
 
             except Exception as error:
                 print(f"[CAMERA {self.camera_id}] Error: {error}")
@@ -92,12 +87,57 @@ class CameraConnection:
         self._release()
         print(f"[CAMERA {self.camera_id}] STOPPED")
 
+    def _open_capture(self, source):
+        if self.camera_type in {"webcam", "video"}:
+            self.cap = cv2.VideoCapture(source)
+        else:
+            self.cap = cv2.VideoCapture(source,cv2.CAP_FFMPEG)
+
+        if self.camera_type == "video":
+            fps = self.cap.get(cv2.CAP_PROP_FPS)
+            if fps and fps > 0:
+                self.video_fps = fps
+
+            print(f"[CAMERA {self.camera_id}] ", f"Video FPS: {self.video_fps:.2f}")
+
+    def _start_processing(self):
+        print(f"[CAMERA {self.camera_id}] ONLINE")
+        self.status = "online"
+        self.vision_processor = VisionProcessor(self, self.camera_id)
+        self.vision_processor.start()
+
+    def _read_frames(self):
+        while self.running:
+            ret, frame = self.cap.read()
+            if not self.running:
+                break
+
+            if not ret:
+                msg = "Video finished" if self.camera_type == "video" else "Stream lost"
+                print(f"[CAMERA {self.camera_id}] {msg}")
+                self.status = "offline"
+                break
+
+            with self.lock:
+                self.frame = frame
+
+            if self.camera_type == "video":
+                time.sleep(1.0 / self.video_fps)
+
     def get_frame(self):
         with self.lock:
             return self.frame.copy() if self.frame is not None else None
 
     def get_status(self):
         return self.status
+
+    def get_media_time(self):
+        if self.camera_type == "video":
+            return (self.cap.get(cv2.CAP_PROP_POS_MSEC) / 1000.0) if self.cap else 0.0
+        return time.time()
+
+    def get_video_file(self):
+        return self.camera_config.get("video_file") if self.camera_type == "video" else None
 
     def _release(self):
         if self.cap:
@@ -116,13 +156,10 @@ class CameraConnection:
         print(f"[CAMERA {self.camera_id}] Stopping...")
         self.running = False
         self._stop_processing()
-
         if self.thread and self.thread.is_alive():
             self.thread.join(timeout=2.0)
-
         self._release()
-        self.thread = None
-        self.status = "offline"
+        self.thread, self.status = None, "offline"
         with self.lock:
             self.frame = None
         print(f"[CAMERA {self.camera_id}] Stopped")

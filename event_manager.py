@@ -30,11 +30,15 @@ class EventManager:
         event = {
             "event_id": self.next_event_id,
             "track_id": track["track_id"],
+            "camera_id": track.get("camera_id"),
+            "camera_name": track.get("camera_name"),
+            "nvr_ip": track.get("nvr_ip"),
+            "nvr_channel": track.get("nvr_channel"),
             "object_type": track["object_type"],
-            "start_time": self._format_timestamp(track["first_seen"]),
-            "end_time": self._format_timestamp(track["last_seen"]),
-            "attributes": track.get("attributes"),
-            "video_file": None,
+            "start_time": self._format_time(track, "first_media_time"),
+            "end_time": self._format_time(track, "last_media_time"),
+            "attributes": track.get("attributes", {}),
+            "video_file": track.get("video_file"),
         }
 
         events.append(event)
@@ -45,8 +49,12 @@ class EventManager:
         self.next_event_id += 1
         return event
 
-    def _format_timestamp(self, timestamp):
-        return datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
+    def _format_time(self, track, key):
+        val = track.get(key)
+        if track.get("source_type") == "video":
+            s = max(0, int(float(val or 0)))
+            return f"{s // 3600:02d}:{(s % 3600) // 60:02d}:{s % 60:02d}"
+        return datetime.fromtimestamp(val).strftime("%Y-%m-%d %H:%M:%S") if val is not None else None
 
     def _print_event(self, event):
-        print(f"\n[EVENT SAVED] ID: {event['event_id']} | Track: {event['track_id']} | Type: {event['object_type']} | {event['start_time']} -> {event['end_time']}\n")
+        print(f"\n[EVENT SAVED] ID: {event['event_id']} | Track: {event['track_id']} | Cam: {event['camera_id']} | Type: {event['object_type']} | {event['start_time']} -> {event['end_time']} | File: {event['video_file']}\n")

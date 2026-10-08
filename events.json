@@ -1,10 +1,14 @@
 [
     {
         "event_id": 1,
-        "track_id": 35,
+        "track_id": 4316,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:07:34",
-        "end_time": "2026-10-05 15:07:34",
+        "start_time": "2026-10-08 19:15:27",
+        "end_time": "2026-10-08 19:15:30",
         "attributes": {
             "shirt": "black",
             "pants": "black"
@@ -13,178 +17,341 @@
     },
     {
         "event_id": 2,
-        "track_id": 44,
+        "track_id": 4346,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:07:37",
-        "end_time": "2026-10-05 15:07:40",
+        "start_time": "2026-10-08 19:16:27",
+        "end_time": "2026-10-08 19:16:27",
         "attributes": {
             "shirt": "black",
-            "pants": "gray"
+            "pants": "dark_gray"
         },
         "video_file": null
     },
     {
         "event_id": 3,
-        "track_id": 47,
+        "track_id": 4349,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:07:37",
-        "end_time": "2026-10-05 15:07:41",
+        "start_time": "2026-10-08 19:16:27",
+        "end_time": "2026-10-08 19:16:28",
         "attributes": {
-            "shirt": "gray",
-            "pants": "white"
+            "shirt": "black",
+            "pants": "dark_gray"
         },
         "video_file": null
     },
     {
         "event_id": 4,
-        "track_id": 57,
+        "track_id": 4350,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:07:42",
-        "end_time": "2026-10-05 15:07:42",
+        "start_time": "2026-10-08 19:16:28",
+        "end_time": "2026-10-08 19:16:29",
         "attributes": {
-            "shirt": "gray",
-            "pants": "gray"
+            "shirt": "black",
+            "pants": "dark_gray"
         },
         "video_file": null
     },
     {
         "event_id": 5,
-        "track_id": 141,
-        "object_type": "motorcycle",
-        "start_time": "2026-10-05 15:11:11",
-        "end_time": "2026-10-05 15:11:28",
+        "track_id": 4355,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "person",
+        "start_time": "2026-10-08 19:17:23",
+        "end_time": "2026-10-08 19:17:24",
+        "attributes": {
+            "shirt": "dark_gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 6,
+        "track_id": 4371,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "person",
+        "start_time": "2026-10-08 19:18:48",
+        "end_time": "2026-10-08 19:18:51",
+        "attributes": {
+            "shirt": "dark_gray",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 7,
+        "track_id": 4380,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "person",
+        "start_time": "2026-10-08 19:19:02",
+        "end_time": "2026-10-08 19:19:06",
+        "attributes": {
+            "shirt": "brown",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 8,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:14:34",
+        "end_time": "2026-10-08 19:19:36",
         "attributes": {
             "color": "blue"
         },
         "video_file": null
     },
     {
-        "event_id": 6,
-        "track_id": 3,
-        "object_type": "person",
-        "start_time": "2026-10-05 15:19:55",
-        "end_time": "2026-10-05 15:20:08",
+        "event_id": 9,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:19:38",
+        "end_time": "2026-10-08 19:20:09",
         "attributes": {
-            "shirt": "red",
-            "pants": "blue"
+            "color": "gray"
         },
         "video_file": null
     },
     {
-        "event_id": 7,
-        "track_id": 3,
+        "event_id": 10,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:20:16",
+        "end_time": "2026-10-08 19:20:18",
+        "attributes": {
+            "color": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 11,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:20:20",
+        "end_time": "2026-10-08 19:20:21",
+        "attributes": {
+            "color": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 12,
+        "track_id": 4413,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:20:19",
-        "end_time": "2026-10-05 15:20:20",
+        "start_time": "2026-10-08 19:20:27",
+        "end_time": "2026-10-08 19:20:28",
         "attributes": {
             "shirt": "black",
-            "pants": "red"
+            "pants": "pink"
         },
         "video_file": null
     },
     {
-        "event_id": 8,
-        "track_id": 2,
+        "event_id": 13,
+        "track_id": 4414,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "car",
-        "start_time": "2026-10-05 15:24:26",
-        "end_time": "2026-10-05 15:24:27",
+        "start_time": "2026-10-08 19:20:28",
+        "end_time": "2026-10-08 19:20:29",
         "attributes": {
-            "color": "white"
+            "color": "gray"
         },
         "video_file": null
     },
     {
-        "event_id": 8,
-        "track_id": 43,
-        "object_type": "person",
-        "start_time": "2026-10-05 15:25:44",
-        "end_time": "2026-10-05 15:25:48",
-        "attributes": {
-            "shirt": "red",
-            "pants": "blue"
-        },
-        "video_file": null
-    },
-    {
-        "event_id": 9,
-        "track_id": 56,
+        "event_id": 14,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "car",
-        "start_time": "2026-10-05 15:25:58",
-        "end_time": "2026-10-05 15:25:58",
+        "start_time": "2026-10-08 19:20:32",
+        "end_time": "2026-10-08 19:20:36",
         "attributes": {
             "color": "black"
         },
         "video_file": null
     },
     {
-        "event_id": 10,
-        "track_id": 72,
+        "event_id": 15,
+        "track_id": 4415,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:26:00",
-        "end_time": "2026-10-05 15:26:01",
+        "start_time": "2026-10-08 19:20:30",
+        "end_time": "2026-10-08 19:20:42",
         "attributes": {
-            "shirt": "gray",
-            "pants": "gray"
-        },
-        "video_file": null
-    },
-    {
-        "event_id": 11,
-        "track_id": 77,
-        "object_type": "person",
-        "start_time": "2026-10-05 15:26:01",
-        "end_time": "2026-10-05 15:26:02",
-        "attributes": {
-            "shirt": "gray",
-            "pants": "gray"
-        },
-        "video_file": null
-    },
-    {
-        "event_id": 12,
-        "track_id": 102,
-        "object_type": "person",
-        "start_time": "2026-10-05 15:26:49",
-        "end_time": "2026-10-05 15:26:53",
-        "attributes": {
-            "shirt": "gray",
+            "shirt": "pink",
             "pants": "white"
         },
         "video_file": null
     },
     {
-        "event_id": 13,
-        "track_id": 111,
-        "object_type": "person",
-        "start_time": "2026-10-05 15:27:30",
-        "end_time": "2026-10-05 15:27:35",
+        "event_id": 16,
+        "track_id": 4294,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:14:31",
+        "end_time": "2026-10-08 19:21:38",
         "attributes": {
-            "shirt": "blue",
-            "pants": "white"
+            "color": "blue"
         },
         "video_file": null
     },
     {
-        "event_id": 14,
-        "track_id": 59,
+        "event_id": 17,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:20:38",
+        "end_time": "2026-10-08 19:21:38",
+        "attributes": {
+            "color": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 18,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:21:39",
+        "end_time": "2026-10-08 19:22:32",
+        "attributes": {
+            "color": "blue"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 19,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:22:34",
+        "end_time": "2026-10-08 19:22:55",
+        "attributes": {
+            "color": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 20,
+        "track_id": 4441,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
         "object_type": "person",
-        "start_time": "2026-10-05 15:40:18",
-        "end_time": "2026-10-05 15:40:25",
+        "start_time": "2026-10-08 19:23:34",
+        "end_time": "2026-10-08 19:23:38",
         "attributes": {
             "shirt": "red",
-            "pants": "blue"
+            "pants": "black"
         },
         "video_file": null
     },
     {
-        "event_id": 14,
-        "track_id": 91,
-        "object_type": "person",
-        "start_time": "2026-10-05 15:41:54",
-        "end_time": "2026-10-05 15:41:55",
+        "event_id": 21,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:22:56",
+        "end_time": "2026-10-08 19:24:06",
         "attributes": {
-            "shirt": "gray",
-            "pants": "gray"
+            "color": "gray"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 22,
+        "track_id": 4464,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "person",
+        "start_time": "2026-10-08 19:24:13",
+        "end_time": "2026-10-08 19:24:16",
+        "attributes": {
+            "shirt": "black",
+            "pants": "black"
+        },
+        "video_file": null
+    },
+    {
+        "event_id": 23,
+        "track_id": 4298,
+        "camera_id": 1,
+        "camera_name": "Front Gate",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6,
+        "object_type": "car",
+        "start_time": "2026-10-08 19:24:11",
+        "end_time": "2026-10-08 19:24:32",
+        "attributes": {
+            "color": "blue"
         },
         "video_file": null
     }

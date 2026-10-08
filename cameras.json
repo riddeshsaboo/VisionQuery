@@ -1,1 +1,15 @@
-[]
+[
+    {
+        "id": 1,
+        "name": "Front Gate",
+        "type": "ip",
+        "connection_method": "credentials",
+        "status": "offline",
+        "rtsp_url": "",
+        "ip": "192.168.0.50",
+        "username": "admin",
+        "password": "123456",
+        "nvr_ip": "192.168.0.112",
+        "nvr_channel": 6
+    }
+]
